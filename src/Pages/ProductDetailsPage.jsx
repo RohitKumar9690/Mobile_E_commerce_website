@@ -2,10 +2,22 @@ import React, { useState } from 'react';
 import { products } from '../data/Poduct'; // Make sure this points to your actual data file
 import { useParams } from 'react-router-dom';
 import { ShoppingCart } from 'lucide-react'
+import WhatsAppModal from '../Components/WhatsaapModal';
 
 const ProductDetailsPage = () => {
     const { id } = useParams();
-    console.log(id);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    // Handle opening the modal
+    const handleOpenModal = () => {
+        setIsModalOpen(true);
+    };
+
+    // Handle closing the modal
+    const handleCloseModal = () => {
+        setIsModalOpen(false);
+    };
+    // console.log(id);
 
     // Find the product by its id
     const product = products.find((p) => p.id === parseInt(id));
@@ -78,11 +90,17 @@ const ProductDetailsPage = () => {
                         <p className="text-gray-600">{product.description}</p>
                     </div>
                     <div className="mt-4">
-                        <button className="flex items-center bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+                        <button className="flex items-center bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded" onClick={handleOpenModal}>
                             Buy Now <ShoppingCart className="h-4 w-4 ml-2" />
                         </button>
                     </div>
                 </div>
+                <WhatsAppModal
+                    isOpen={isModalOpen}
+                    onClose={handleCloseModal}
+                    phoneNumber="+91 1234567890" 
+                    message={`Hello, I would like to buy the product "${product.title}" with ID: ${product.id}.`}
+                />
             </div>
 
             <div className="bg-white p-4 rounded-lg shadow-lg mt-4">
@@ -100,6 +118,7 @@ const ProductDetailsPage = () => {
                     </table>
                 </div>
             </div>
+
         </div>
     );
 };
