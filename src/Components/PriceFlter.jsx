@@ -10,9 +10,9 @@ const PriceFilter = ({ selectedPriceRange, onPriceRangeChange }) => {
         onChange={(e) => onPriceRangeChange(e.target.value)}
       >
         <option value="All">All Prices</option>
-        <option value="Low">Under $500</option>
-        <option value="Mid">$500 - $1000</option>
-        <option value="High">Above $1000</option>
+        <option value="Low">Under 50,000</option>
+      <option value="Mid">₹50,000 - ₹100,000</option>
+        <option value="High">Above ₹100,000</option>
       </select>
     </div>
   );

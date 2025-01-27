@@ -18,27 +18,32 @@ const handleProductClick=(id)=>{
 }
 
 
-  const filteredProducts = products.filter((product) => {
-    // Filter by search query
-    const matchesSearch = product.title.toLowerCase().includes(searchQuery.toLowerCase());
+const filteredProducts = products.filter((product) => {
+  // Filter by search query
+  const matchesSearch = product.title.toLowerCase().includes(searchQuery.toLowerCase());
 
-    // Filter by brand
-    const matchesBrand = selectedBrand === 'All' || product.brand === selectedBrand;
+  // Filter by brand
+  const matchesBrand = selectedBrand === 'All' || product.brand === selectedBrand;
 
-    // Filter by price range
-    let matchesPrice = true;
+  // Filter by price range
+  let matchesPrice = true;
+  const price = parseFloat(product.price.replace(/[^\d.-]/g, ''));  // Remove non-numeric characters if any
+  
+  if (isNaN(price)) {
+    matchesPrice = false; // If the price is not a valid number, exclude this product
+  } else {
     if (selectedPriceRange === 'Low') {
-      console.log(product.price);
-      
-      matchesPrice = parseFloat(product.price) < 50000;
+      matchesPrice = price < 50000;
     } else if (selectedPriceRange === 'Mid') {
-      matchesPrice = parseFloat(product.price) >= 50000 && parseFloat(product.price) <= 1000000;
+      matchesPrice = price >= 50000 && price <= 1000000;
     } else if (selectedPriceRange === 'High') {
-      matchesPrice = parseFloat(product.price) > 1000;
+      matchesPrice = price > 1000000;
     }
+  }
 
-    return matchesBrand && matchesPrice && matchesSearch;
-  });
+  return matchesBrand && matchesPrice && matchesSearch;
+});
+
   return (
     <div><AnimatedText className="" />
       <div className="flex flex-col sm:flex-row justify-center p-4 space-y-4 sm:space-y-0">

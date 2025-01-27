@@ -1,10 +1,11 @@
 import React from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { products } from '../data/Poduct'
 import ProductCard from '../Components/ProductCard'
 
 const CategoriesBrand = () => {
     const {category,network,os} = useParams()
+    const navigate = useNavigate();
 let Products = products;
     if(category){
         Products =products.filter((p) => p.brand === category);
@@ -14,10 +15,13 @@ let Products = products;
     else if(os){
         Products =products.filter((p) => p.OperatingSystem === os)
     }
-    console.log(Products);
+    // console.log(Products);
     
-    console.log(category);
+    // console.log(category);
     
+    const handleProductClick = (id) => {
+      navigate(`/Product-Details/${id}`)
+    }
   return (
     <div><div className='flex justify-center space-x-4'>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
@@ -36,7 +40,7 @@ let Products = products;
                     originalPrice={product.originalPrice}
                     discountedPrice={product.price}
                     discountPercentage={product.discountPercentage}
-                    // onProductClick={() => handleProductClick(product.id)}
+                    onProductClick={() => handleProductClick(product.id)}
                   />
                 ))
               )}

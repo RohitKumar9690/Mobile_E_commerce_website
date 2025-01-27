@@ -29,22 +29,22 @@ const Home = () => {
 
   const handleNavigate = (category) => {
     navigate(`/category/${category}`);
-    console.log(category);
+    // console.log(category);
 
   }
 
   const handleProductClick = (id) => {
     navigate(`/Product-Details/${id}`)
-    console.log(id)
+    // console.log(id)
   }
 
   const handleNavigateNetwork = (network) => {
     navigate(`/networkCategory/${network}`);
-    console.log(network);
+    // console.log(network);
   }
   const handleNavigateOS = (os) => {
     navigate(`/operatingSystem/${os}`);
-    console.log(os);
+    // console.log(os);
   }
   const scrollContainerRef = useRef(null);
   const ScrollMobile = useRef(null);
