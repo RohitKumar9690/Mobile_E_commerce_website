@@ -23,8 +23,42 @@ import ProductCard from '../Components/ProductCard';
 import { ChevronsLeft, ChevronsRight, Section } from 'lucide-react';
 import GridDesign from '../Components/GridDesign';
 import LogoWall from '../Components/Animations/Logowall';
+import Slider from 'react-slick';
 const Home = () => {
-
+  const settings = {
+    dots: false,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 4,
+    initialSlide: 0,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+          dots: true
+        }
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initialSlide: 2
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      }
+    ]
+  };
   const navigate = useNavigate();
 
   const handleNavigate = (category) => {
@@ -52,36 +86,24 @@ const Home = () => {
   // Function to scroll left
   const scrollLeft = () => {
     if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollBy({
-        left: -200,
-        behavior: 'smooth',
-      });
+      scrollContainerRef.current.slickPrev();
     }
   };
   const scrollLeft1 = () => {
     if (ScrollMobile.current) {
-      ScrollMobile.current.scrollBy({
-        left: -300,
-        behavior: 'smooth',
-      });
+      ScrollMobile.current.slickPrev();
     }
   };
   // Function to scroll right
   const scrollRight = () => {
     if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollBy({
-        left: 200,
-        behavior: 'smooth',
-      });
+      scrollContainerRef.current.slickNext();
     }
   };
 
   const scrollRight1 = () => {
     if (ScrollMobile.current) {
-      ScrollMobile.current.scrollBy({
-        left: 300,
-        behavior: 'smooth',
-      });
+      ScrollMobile.current.slickNext();
     }
   };
   const logoImgs = [
@@ -135,47 +157,45 @@ const Home = () => {
     <div>
       <Coursel />
       <section className="mt-10 p-5 relative">
-        <div>
-          <h2 className="text-3xl font-bold text-center">Latest Products</h2>
-        </div>
+  <div>
+    <h2 className="text-3xl font-bold text-center">Latest Products</h2>
+  </div>
+  
+  <button
+    onClick={scrollLeft1}
+    className="absolute left-0 top-1/2 transform -translate-y-1/2 p-2 bg-gray-800 text-white  ml-5 rounded-full shadow-lg z-10"
+  >
+    <ChevronsLeft />
+  </button>
+  
+  {/* Slick Slider */}
+  <Slider {...settings} ref={ScrollMobile} className="flex overflow-x-hidden">
+    {products.map((product) => (
+      <div key={product.id} className='mb-5' onClick={() => handleProductClick(product.id)}>
+        <ProductCard
+          id={product.id}
+          title={product.title}
+          image={product.mainImage}
+          price={product.price}
+          rating={product.rating}
+          category={product.category}
+          reviews={product.reviews}
+        />
+      </div>
+    ))}
+  </Slider>
 
-        {/* Scroll Left Button */}
-        <button
-          onClick={scrollLeft1}
-          className="absolute left-0 top-1/2 transform -translate-y-1/2 p-2 bg-gray-800 text-white  ml-5 rounded-full shadow-lg z-10"
-        >
-          <ChevronsLeft />      </button>
+  <button
+    onClick={scrollRight1}
+    className="absolute right-0 top-1/2 transform -translate-y-1/2 p-2 bg-gray-800 text-white rounded-full mr-5 shadow-lg z-10"
+  >
+    <ChevronsRight />
+  </button>
+</section>
 
-        {/* Scrollable Container for Products */}
-        <div
-          ref={ScrollMobile}
-          className="flex overflow-x-hidden space-x-4 pb-5"
-        >
-          {products.map((product) => (
-            <div key={product.id} className="flex-shrink-0 " onClick={() => handleProductClick(product.id)}>
-              <ProductCard
-                id={product.id}
-                title={product.title}
-                image={product.mainImage}
-                price={product.price}
-                rating={product.rating}
-                category={product.category}
-                reviews={product.reviews}
-              />
-            </div>
-          ))}
-        </div>
-
-        {/* Scroll Right Button */}
-        <button
-          onClick={scrollRight1}
-          className="absolute right-0 top-1/2 transform -translate-y-1/2 p-2 bg-gray-800 text-white rounded-full mr-5 shadow-lg z-10"
-        >
-          <ChevronsRight />      </button>
-      </section>
       <section className="mt-10 p-5">
         <div className="ml-5">
-          <h2 className="text-3xl font-bold text-gray-700">Categories by Brand</h2>
+          <h2 className="flex justify-center items-centerlg:text-3xl font-bold text-gray-700 sm:text-lg ">Categories by Brand</h2>
         </div>
         <div className="relative mt-5">
           {/* Left Scroll Button */}
@@ -186,7 +206,7 @@ const Home = () => {
             <ChevronsLeft />          </button>
 
           {/* Scrollable Cards Container */}
-          <div
+          <Slider {...settings}
             ref={scrollContainerRef}
             className="flex overflow-x-hidden space-x-4 px-4 pb-2 scroll-smooth"
           >
@@ -199,7 +219,7 @@ const Home = () => {
                 getOncategory={() => handleNavigate(category.title)}
               />
             ))}
-          </div>
+          </Slider>
 
           {/* Right Scroll Button */}
           <button
@@ -211,7 +231,7 @@ const Home = () => {
       </section>
       <section className='mt-10'>
         <div className="ml-5">
-          <h2 className="text-3xl font-bold text-gray-700">Categories by Network</h2>
+          <h2 className="flex justify-center lg:text-3xl font-bold text-gray-700 sm:text-lg ">Categories by Network</h2>
         </div>
         <div className='flex'>
           {
