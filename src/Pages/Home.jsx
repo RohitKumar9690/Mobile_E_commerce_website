@@ -158,7 +158,7 @@ const Home = () => {
       <Coursel />
       <section className="mt-10 p-5 relative">
   <div>
-    <h2 className="text-3xl font-bold text-center">Latest Products</h2>
+    <h2 className="flex justify-center items-centerlg:text-3xl font-bold text-gray-700 sm:text-2xl">Latest Products</h2>
   </div>
   
   <button
@@ -195,7 +195,7 @@ const Home = () => {
 
       <section className="mt-10 p-5">
         <div className="ml-5">
-          <h2 className="flex justify-center items-centerlg:text-3xl font-bold text-gray-700 sm:text-lg ">Categories by Brand</h2>
+          <h2 className="flex justify-center items-centerlg:text-3xl font-bold text-gray-700 sm:text-2xl">Categories by Brand</h2>
         </div>
         <div className="relative mt-5">
           {/* Left Scroll Button */}
@@ -231,7 +231,7 @@ const Home = () => {
       </section>
       <section className='mt-10'>
         <div className="ml-5">
-          <h2 className="flex justify-center lg:text-3xl font-bold text-gray-700 sm:text-lg ">Categories by Network</h2>
+          <h2 className="flex justify-center items-centerlg:text-3xl font-bold text-gray-700 sm:text-2xl">Categories by Network</h2>
         </div>
         <div className='flex'>
           {
@@ -250,7 +250,7 @@ const Home = () => {
 
       <section className='mt-10'>
         <div className="ml-5">
-          <h2 className="text-3xl font-bold text-gray-700">Categories by operating system</h2>
+          <h2 className="flex justify-center items-centerlg:text-3xl font-bold text-gray-700 sm:text-2xl">Categories by operating system</h2>
         </div>
         <div className='flex'>
           {
@@ -272,7 +272,7 @@ const Home = () => {
       <section>
 
         <div className='flex justify-center items-center mt-5 mb-5'>
-          <h2 className="text-3xl font-bold text-gray-700 ">We are sells top qualities and Brand products</h2>
+          <h2 className="flex justify-center items-centerlg:text-3xl font-bold text-gray-700 sm:text-2xl">We are sells top qualities and Brand products</h2>
         </div>
 
         <div >

@@ -12,7 +12,7 @@ export default function ProductCard({
   onProductClick
 }) {
   return (
-    <div className="bg-white rounded-2xl shadow-lg p-6 w-80" onClick={ ()=> onProductClick(id)}>
+    <div className=" bg-white rounded-2xl shadow-lg p-6 w-80 ml-8" onClick={ ()=> onProductClick(id)}>
       {/* Product ID and Floating Buttons */}
       <div className="flex justify-between items-center mb-4">
         <span className="text-gray-500 text-sm">id: {id}</span>
